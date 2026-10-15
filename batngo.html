@@ -51,14 +51,14 @@
             Liệu bạn có cho Quang 500k không? 🥺
         </h1>
 
-        <div id="btn-container" class="relative h-20 flex items-center justify-center gap-6">
+        <div id="btn-container" class="flex items-center justify-center gap-6 min-h-[60px] relative">
             <!-- Nút Đồng Ý -->
             <button onclick="acceptMoney()" class="bg-gradient-to-r from-emerald-500 to-green-600 text-white font-black py-3 px-8 rounded-full text-lg shadow-lg hover:scale-110 transition duration-200 z-20">
                 Đồng ý ❤️
             </button>
 
-            <!-- Nút Không (Tự động chạy trốn khi đưa chuột/chạm vào) -->
-            <button id="btn-no" onmouseover="dodgeButton()" ontouchstart="dodgeButton()" class="bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg transition-all duration-150 absolute">
+            <!-- Nút Không (Luôn hiện rõ, khi đụng vào mới chạy trốn) -->
+            <button id="btn-no" onmouseover="dodgeButton()" ontouchstart="dodgeButton()" class="bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg transition-all duration-150 z-30">
                 Không 😜
             </button>
         </div>
@@ -99,6 +99,7 @@
             const randomX = Math.max(20, Math.floor(Math.random() * maxX));
             const randomY = Math.max(20, Math.floor(Math.random() * maxY));
 
+            // Chuyển sang fixed khi bắt đầu chạy trốn
             btnNo.style.position = 'fixed';
             btnNo.style.left = randomX + 'px';
             btnNo.style.top = randomY + 'px';
