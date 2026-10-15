@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Thằng Bạn Thân 🐶</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Playfair+Display:ital,wght@1,800&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* Hiệu ứng chữ đổi màu liên tục */
+        .rainbow-text {
+            background: linear-gradient(
+                90deg, 
+                #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff, #ff0000
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: rainbow 1.5s linear infinite, pulse 0.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+
+        /* Khung phản quang nhấp nháy */
+        .glow-box {
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Khung chính -->
+    <div class="relative z-10 bg-slate-900/90 backdrop-blur-xl p-8 sm:p-12 rounded-3xl glow-box max-w-lg w-full mx-4 text-center">
+        <!-- Icon troll -->
+        <div class="text-6xl sm:text-7xl mb-4 animate-bounce">
+            🐶
+        </div>
+
+        <!-- Tiêu đề câu hỏi -->
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-300 mb-6 uppercase tracking-wider">
+            Bấm vào để xem bí mật...
+        </h2>
+
+        <!-- Khung chữ troll chính -->
+        <div class="my-8 py-6 px-4 bg-slate-800/80 rounded-2xl border border-slate-700 shadow-inner">
+            <h1 class="rainbow-text text-4xl sm:text-6xl font-black tracking-tight leading-tight uppercase">
+                ĐỌC LÀM CHOÁ
+            </h1>
+        </div>
+
+        <!-- Lời nhắn đùa -->
+        <p class="text-slate-400 text-sm sm:text-base font-medium italic mb-6">
+            Lỡ đọc rồi thì chấp nhận đi nhé bạn tôi ơi! 🤪✨
+        </p>
+
+        <!-- Nút bấm vui -->
+        <button onclick="trollMore()" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:opacity-90 hover:scale-105 transition duration-200">
+            Chấp nhận số phận 🐾
+        </button>
+    </div>
+
+    <script>
+        // Bắn pháo hoa khi vừa tải trang
+        window.addEventListener('DOMContentLoaded', () => {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        });
+
+        // Bấm nút để bắn thêm hiệu ứng và báo sủa
+        function trollMore() {
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.5 }
+            });
+            alert("Gâu gâu! 🐕 Trò đùa hoàn thành!");
+        }
+    </script>
+</body>
+</html>
