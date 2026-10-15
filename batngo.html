@@ -3,105 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gửi Thằng Bạn Thân 🐶</title>
+    <title>Bất ngờ dành cho bạn ✨</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Playfair+Display:ital,wght@1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background: #0f172a;
+            background-color: #ffffff;
             min-height: 100vh;
+            margin: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin: 0;
         }
 
-        /* Hiệu ứng chữ đổi màu liên tục */
-        .rainbow-text {
-            background: linear-gradient(
-                90deg, 
-                #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff, #ff0000
-            );
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: rainbow 1.5s linear infinite, pulse 0.8s ease-in-out infinite alternate;
-        }
-
-        @keyframes rainbow {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
-
+        /* Hiệu ứng nhịp đập */
         @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.08); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
-
-        /* Khung phản quang nhấp nháy */
-        .glow-box {
-            box-shadow: 0 0 30px rgba(255, 0, 128, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2);
-            border: 3px solid rgba(255, 255, 255, 0.3);
+        .pulse-anim {
+            animation: pulse 1.5s infinite ease-in-out;
         }
     </style>
 </head>
-<body>
+<body class="relative">
 
-    <!-- Khung chính -->
-    <div class="relative z-10 bg-slate-900/90 backdrop-blur-xl p-8 sm:p-12 rounded-3xl glow-box max-w-lg w-full mx-4 text-center">
-        <!-- Icon troll -->
-        <div class="text-6xl sm:text-7xl mb-4 animate-bounce">
-            🐶
+    <!-- BƯỚC 1: TRANG TRẮNG CÓ NÚT "BẤM VÀO ĐÂY" -->
+    <div id="step-1" class="text-center">
+        <button onclick="showQuestion()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-lg text-xl transition duration-200 pulse-anim cursor-pointer">
+            Bấm vào đây 👇
+        </button>
+    </div>
+
+    <!-- BƯỚC 2: CÂU HỎI VÀ NÚT TỪ CHỐI CHẠY TRỐN -->
+    <div id="step-2" class="hidden relative z-10 bg-slate-900/90 backdrop-blur-xl p-8 sm:p-10 rounded-3xl shadow-2xl max-w-lg w-full mx-4 text-center border border-slate-700">
+        <div class="text-6xl mb-4">
+            💸
         </div>
 
-        <!-- Tiêu đề câu hỏi -->
-        <h2 class="text-xl sm:text-2xl font-bold text-slate-300 mb-6 uppercase tracking-wider">
-            Bấm vào để xem bí mật...
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-8 leading-relaxed">
+            Liệu bạn có cho Quang 500k không? 🥺
+        </h1>
+
+        <div id="btn-container" class="relative h-20 flex items-center justify-center gap-6">
+            <!-- Nút Đồng Ý -->
+            <button onclick="acceptMoney()" class="bg-gradient-to-r from-emerald-500 to-green-600 text-white font-black py-3 px-8 rounded-full text-lg shadow-lg hover:scale-110 transition duration-200 z-20">
+                Đồng ý ❤️
+            </button>
+
+            <!-- Nút Không (Tự động chạy trốn khi đưa chuột/chạm vào) -->
+            <button id="btn-no" onmouseover="dodgeButton()" ontouchstart="dodgeButton()" class="bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg transition-all duration-150 absolute">
+                Không 😜
+            </button>
+        </div>
+    </div>
+
+    <!-- BƯỚC 3: THÔNG BÁO KHI ĐỒNG Ý -->
+    <div id="step-3" class="hidden relative z-10 bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl max-w-sm w-full mx-4 text-center border border-emerald-200">
+        <div class="text-6xl mb-4">
+            🎉🥰
+        </div>
+        <h2 class="text-2xl font-black text-emerald-600 mb-2">
+            Cảm ơn bạn nhiều nha!
         </h2>
-
-        <!-- Khung chữ troll chính -->
-        <div class="my-8 py-6 px-4 bg-slate-800/80 rounded-2xl border border-slate-700 shadow-inner">
-            <h1 class="rainbow-text text-4xl sm:text-6xl font-black tracking-tight leading-tight uppercase">
-                ĐỌC LÀM CHOÁ
-            </h1>
-        </div>
-
-        <!-- Lời nhắn đùa -->
-        <p class="text-slate-400 text-sm sm:text-base font-medium italic mb-6">
-            Lỡ đọc rồi thì chấp nhận đi nhé bạn tôi ơi! 🤪✨
+        <p class="text-gray-700 font-semibold mb-6">
+            Quang đã nhận 500k rồi nhé! Uy tín luôn ❤️
         </p>
-
-        <!-- Nút bấm vui -->
-        <button onclick="trollMore()" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:opacity-90 hover:scale-105 transition duration-200">
-            Chấp nhận số phận 🐾
+        <button onclick="location.reload()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-6 rounded-full shadow transition">
+            Bấm để chơi lại 🔄
         </button>
     </div>
 
     <script>
-        // Bắn pháo hoa khi vừa tải trang
-        window.addEventListener('DOMContentLoaded', () => {
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-        });
+        // Hiển thị giao diện câu hỏi khi bấm vào nút ban đầu
+        function showQuestion() {
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+            document.body.style.backgroundColor = '#0f172a'; // Đổi nền sang màu tối lung linh
+        }
 
-        // Bấm nút để bắn thêm hiệu ứng và báo sủa
-        function trollMore() {
+        // Hàm khiến nút "Không" tự dịch chuyển chạy trốn
+        function dodgeButton() {
+            const btnNo = document.getElementById('btn-no');
+            
+            // Tính toán khoảng cách tối đa trong màn hình
+            const maxX = window.innerWidth - btnNo.offsetWidth - 40;
+            const maxY = window.innerHeight - btnNo.offsetHeight - 40;
+
+            const randomX = Math.max(20, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(20, Math.floor(Math.random() * maxY));
+
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        // Khi bấm nút "Đồng ý"
+        function acceptMoney() {
+            // Bắn pháo hoa ăn mừng
             confetti({
                 particleCount: 150,
-                spread: 100,
-                origin: { y: 0.5 }
+                spread: 90,
+                origin: { y: 0.6 }
             });
-            alert("Gâu gâu! 🐕 Trò đùa hoàn thành!");
+
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
         }
     </script>
 </body>
